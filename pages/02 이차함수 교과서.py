@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
 # --- 제목 ---
 st.title("📘 이차함수 교과서")
@@ -25,18 +25,20 @@ st.markdown(
 st.header("1️⃣ 이차함수 y = a x² 의 그래프 개형 탐구")
 a = st.slider("a 값을 조정해보세요:", -5.0, 5.0, 1.0, 0.1)
 
-# --- 그래프 그리기 ---
+# --- 그래프 그리기 (Plotly) ---
 x = np.linspace(-5, 5, 200)
 y = a * x**2
 
-fig, ax = plt.subplots()
-ax.plot(x, y, color="royalblue", linewidth=2)
-ax.axhline(0, color='gray', linewidth=1)
-ax.axvline(0, color='gray', linewidth=1)
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_title(f"y = {a}x²")
-st.pyplot(fig)
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=x, y=y, mode='lines', line=dict(color='royalblue', width=3), name=f'y={a}x²'))
+fig.add_hline(y=0, line_color='gray')
+fig.add_vline(x=0, line_color='gray')
+fig.update_layout(title=f"y = {a}x²",
+                  xaxis_title="x",
+                  yaxis_title="y",
+                  plot_bgcolor="white")
+
+st.plotly_chart(fig, use_container_width=True)
 
 # --- 성질 설명 ---
 st.subheader("그래프의 성질 🧠")
