@@ -35,11 +35,11 @@ st.markdown("""
 # 🎛️ 슬라이더 설정
 st.sidebar.header("⚙️ 함수 계수 조절")
 k = st.sidebar.slider("k (분자의 계수)", -10.0, 10.0, 1.0, step=0.1)
-p = st.sidebar.slider("p (수직 점근선 위치)", -10.0, 10.0, 0.0, step=0.1)
-q = st.sidebar.slider("q (수평 점근선 위치)", -10.0, 10.0, 0.0, step=0.1)
+p = st.sidebar.slider("p (수직 점근선 위치)", -50.0, 50.0, 0.0, step=0.5)
+q = st.sidebar.slider("q (수평 점근선 위치)", -50.0, 50.0, 0.0, step=0.5)
 
 # x 값 설정
-x = np.linspace(-10, 10, 1000)
+x = np.linspace(-100, 100, 2000)
 
 # 분모가 0이 되는 점 제외
 mask = (x - p) != 0
@@ -49,8 +49,12 @@ y[mask] = k / (x[mask] - p) + q
 # 그래프 그리기
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.plot(x[mask], y[mask], color='blue', label="y = k / (x - p) + q")
-ax.axhline(q, color='green', linestyle='--', label=f"수평 점근선: y = {q:.2f}")
-ax.axvline(p, color='red', linestyle='--', label=f"수직 점근선: x = {p:.2f}")
+
+# 점근선 범위를 더 길게 설정
+ax.plot([p, p], [-100, 100], color='red', linestyle='--', label=f"수직 점근선: x = {p:.2f}")
+ax.plot([-100, 100], [q, q], color='green', linestyle='--', label=f"수평 점근선: y = {q:.2f}")
+
+# 기준선
 ax.axhline(0, color='black', linewidth=1)
 ax.axvline(0, color='black', linewidth=1)
 
@@ -60,6 +64,10 @@ ax.set_ylabel("y")
 ax.set_title(f"y = {k} / (x - {p}) + {q}")
 ax.legend()
 ax.grid(True)
+
+# 시야 범위 자동 조절
+ax.set_xlim(-20, 20)
+ax.set_ylim(-20, 20)
 
 # 출력
 st.pyplot(fig)
