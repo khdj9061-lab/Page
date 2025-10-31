@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 # 페이지 기본 설정
 st.set_page_config(page_title="유리함수 그래프", layout="centered")
 
-# 💠 배경색 설정
+# 💠 배경색 설정 (수정됨)
 page_bg_color = """
 <style>
 body {
-    background-color: #bff2ff;
+    background-color: #d4f4ff;
 }
 </style>
 """
