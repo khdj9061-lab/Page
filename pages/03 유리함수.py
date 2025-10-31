@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # 페이지 기본 설정
 st.set_page_config(page_title="유리함수 y = k/(x - p) + q", layout="centered")
 
-# 💠 배경색 설정
+# 💠 배경색 설정 (#d4f4ff)
 page_bg_color = """
 <style>
 body {
@@ -50,7 +50,7 @@ y[mask] = k / (x[mask] - p) + q
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.plot(x[mask], y[mask], color='blue', label="y = k / (x - p) + q")
 
-# 점근선 범위를 더 길게 설정
+# 점근선 표시 (넓은 범위)
 ax.plot([p, p], [-100, 100], color='red', linestyle='--', label=f"수직 점근선: x = {p:.2f}")
 ax.plot([-100, 100], [q, q], color='green', linestyle='--', label=f"수평 점근선: y = {q:.2f}")
 
@@ -65,7 +65,7 @@ ax.set_title(f"y = {k} / (x - {p}) + {q}")
 ax.legend()
 ax.grid(True)
 
-# 시야 범위 자동 조절
+# 시야 범위
 ax.set_xlim(-20, 20)
 ax.set_ylim(-20, 20)
 
